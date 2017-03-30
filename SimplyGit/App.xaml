@@ -1,0 +1,15 @@
+﻿<Application x:Class="SimplyGit.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:SimplyGit.ViewModels"
+             xmlns:views="clr-namespace:SimplyGit.Views"
+             >
+    <Application.Resources>
+        <ResourceDictionary>
+            <DataTemplate DataType="{x:Type viewModels:AddRepositoryViewModel}">
+                <views:AddRepositoryView/>
+            </DataTemplate>
+            <Style TargetType="{x:Type Rectangle}" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
