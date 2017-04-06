@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:SimplyGit.ViewModels"
         xmlns:views="clr-namespace:SimplyGit.Views"
+        xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
+        xmlns:prism="http://www.codeplex.com/prism"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="600" 
@@ -13,7 +16,7 @@
         >
 
     <Window.Resources>
-        <DataTemplate DataType="{x:Type vm:RepositoryViewModel}">
+        <DataTemplate DataType="{x:Type vm:RepositoryBookmarkViewModel}">
             <TextBlock Text="{Binding Name}"/>
         </DataTemplate>
     </Window.Resources>
@@ -40,14 +43,38 @@
                 Grid.Column="0"
                 Margin="10"
                 ItemsSource="{Binding BookmarkedRepositories}"
-                SelectedItem="{Binding SelectedRepository}"
-                />
+                >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <views:RepositoryShortInfoView MouseDoubleClick="Control_OnMouseDoubleClick">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <prism:InvokeCommandAction
+                                        Command="{Binding OpenRepositoryTab}" 
+                                        />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </views:RepositoryShortInfoView>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
-            <views:RepositoryDetailsView
-                Grid.Column="1"
+            <xcad:DockingManager 
+                Grid.Column="1" 
                 Margin="10"
-                DataContext="{Binding SelectedRepository}"
-                />
+                AllowMixedOrientation="True"
+                BorderBrush="Black"
+                BorderThickness="1"
+                DocumentsSource="{Binding Documents}" 
+                >
+                <xcad:DockingManager.DocumentHeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </xcad:DockingManager.DocumentHeaderTemplate>
+            </xcad:DockingManager>
         </Grid>
     </DockPanel>
 </Window>

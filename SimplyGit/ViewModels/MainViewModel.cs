@@ -2,15 +2,15 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 using Infrastructure;
 using Microsoft.Practices.Prism.Commands;
 using Newtonsoft.Json;
+using SimplyGit.Interfaces;
 using SimplyGit.Models;
 using SimplyGit.Views;
 
 namespace SimplyGit.ViewModels {
-    internal class MainViewModel : ViewModelBase {
+    internal class MainViewModel : ViewModelBase, IRepositoryActivator {
         private readonly App _app;
         private readonly ConfigurationModel _configuration;
         private readonly string _cfgFilePath;
@@ -34,29 +34,17 @@ namespace SimplyGit.ViewModels {
                 _configuration = new ConfigurationModel();
             }
 
-            BookmarkedRepositories = new ObservableCollection<RepositoryViewModel>();
+            BookmarkedRepositories = new ObservableCollection<RepositoryBookmarkViewModel>();
             if (_configuration.Repositories?.Count > 0) {
                 foreach (var repository in _configuration.Repositories) {
-                    var vm = new RepositoryViewModel(repository);
+                    var vm = new RepositoryBookmarkViewModel(repository, this);
                     BookmarkedRepositories.Add(vm);
                 }
             }
 
             AddRepository = new DelegateCommand(DoAddRepo);
-            RemoveRepository = new DelegateCommand(DoRemoveRepository, CanRemoveRepository);
             CloseApplication = new DelegateCommand(DoCloseApplication);
-        }
-
-        private bool CanRemoveRepository() {
-            return null != _selectedRepository;
-        }
-
-        private void DoRemoveRepository() {
-            var result = MessageBox.Show("Are you sure you want to remove repository?", "Confirm",
-                MessageBoxButtons.OKCancel);
-            if (result == DialogResult.OK) {
-                BookmarkedRepositories.Remove(_selectedRepository);
-            }
+            ActiveRepositories = new ObservableCollection<ActiveRepositoryViewModel>();
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
@@ -86,26 +74,17 @@ namespace SimplyGit.ViewModels {
             var result = dialog.ShowDialog();
             if (result == true) {
                 var newRepo = new RepositoryModel(arvm.RepositoryName, arvm.WorkingFolder);
-                var vm = new RepositoryViewModel(newRepo);
+                var vm = new RepositoryBookmarkViewModel(newRepo, this);
                 BookmarkedRepositories.Add(vm);
             }
         }
 
         public DelegateCommand AddRepository { get; }
-        public DelegateCommand RemoveRepository { get; }
         public DelegateCommand CloseApplication { get; }
 
-        public ObservableCollection<RepositoryViewModel> BookmarkedRepositories { get; }
+        public ObservableCollection<RepositoryBookmarkViewModel> BookmarkedRepositories { get; }
 
-        private RepositoryViewModel _selectedRepository;
-        public RepositoryViewModel SelectedRepository {
-            get { return _selectedRepository; }
-            set {
-                if (Equals(value, _selectedRepository)) return;
-                _selectedRepository = value;
-                OnPropertyChanged();
-            }
-        }
+        public ObservableCollection<ActiveRepositoryViewModel> ActiveRepositories { get; }
 
         internal static string GetProductFolder() {
             var companyFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
@@ -119,5 +98,9 @@ namespace SimplyGit.ViewModels {
 
         public static string ProductName => "SimplyGit";
         public static string ConfigurationFile => "simplygit.cfg";
+        public void Activate(RepositoryBookmarkViewModel repo) {
+            var vm = new ActiveRepositoryViewModel(repo);
+            ActiveRepositories.Add(vm);
+        }
     }
 }
