@@ -5,76 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:SimplyGit.ViewModels"
         xmlns:views="clr-namespace:SimplyGit.Views"
-        xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
-        xmlns:prism="http://www.codeplex.com/prism"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="MainWindow" 
-        Height="600" 
-        Width="1000"
+        Title="SimplyGit"
+        Height="768"
+        Width="1366"
         d:DataContext="{Binding Source={d:DesignInstance Type=vm:MainViewModel, IsDesignTimeCreatable=False}}"
         >
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:RepositoryBookmarkViewModel}">
-            <TextBlock Text="{Binding Name}"/>
+            <CheckBox Content="{Binding Name}"/>
         </DataTemplate>
     </Window.Resources>
-    
+
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Repositories">
                 <MenuItem Header="_Add" Command="{Binding AddRepository}" />
                 <Separator />
-                <MenuItem Header="_Remove" Command="{Binding RemoveRepository}" />
-                <Separator />
                 <MenuItem Header="_Exit" Command="{Binding CloseApplication}"/>
             </MenuItem>
         </Menu>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <ListBox
-                Grid.Row="0"
-                Grid.Column="0"
-                Margin="10"
+            <TabControl
+                Background="#2A2D33"
+                BorderThickness="0"
+                Padding="0"
                 ItemsSource="{Binding BookmarkedRepositories}"
+                SelectedIndex="0"
                 >
-                <ListBox.ItemTemplate>
+                <TabControl.ItemTemplate>
                     <DataTemplate>
-                        <views:RepositoryShortInfoView MouseDoubleClick="Control_OnMouseDoubleClick">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseDoubleClick">
-                                    <prism:InvokeCommandAction
-                                        Command="{Binding OpenRepositoryTab}" 
-                                        />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </views:RepositoryShortInfoView>
+                        <TextBlock Text="{Binding Name}" />
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                </TabControl.ItemTemplate>
 
-            <xcad:DockingManager 
-                Grid.Column="1" 
-                Margin="10"
-                AllowMixedOrientation="True"
-                BorderBrush="Black"
-                BorderThickness="1"
-                DocumentsSource="{Binding Documents}" 
-                >
-                <xcad:DockingManager.DocumentHeaderTemplate>
+                <TabControl.ContentTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Name}" />
-                        </StackPanel>
+                        <views:RepositoryTabView/>
                     </DataTemplate>
-                </xcad:DockingManager.DocumentHeaderTemplate>
-            </xcad:DockingManager>
-        </Grid>
+                </TabControl.ContentTemplate>
+            </TabControl>
     </DockPanel>
 </Window>

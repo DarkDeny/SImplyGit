@@ -1,4 +1,5 @@
-﻿using SimplyGit.ViewModels;
+﻿using System.Windows;
+using SimplyGit.ViewModels;
 using SimplyGit.Views;
 
 namespace SimplyGit {
@@ -6,9 +7,9 @@ namespace SimplyGit {
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App {
-        public MainWindow MainWindow { get; }
+        protected override void OnStartup(StartupEventArgs e) {
+            base.OnStartup(e);
 
-        public App() {
             MainWindow = new MainWindow();
             var vm = new MainViewModel(this);
             MainWindow.DataContext = vm;

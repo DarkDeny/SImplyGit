@@ -1,0 +1,63 @@
+<UserControl x:Class="SimplyGit.Views.RepositoryToolsTreeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300"
+             >
+<Grid Background="#22252B">
+            <StackPanel Orientation="Vertical"
+                        Margin="10">
+                <TreeView Background="Transparent"
+                          BorderThickness="0">
+                    <TreeViewItem Header="BRANCHES"
+                                  IsExpanded="True">
+                        <TreeViewItem Header="dev-master"
+                                      Style="{StaticResource TreeViewItemWithIndicatorStyle}"/>
+                        <TreeViewItem Header="bugfixes_v01"
+                                      Style="{StaticResource TreeViewItemWithIndicatorStyle}"/>
+                        <TreeViewItem Header="exporter"
+                                      Style="{StaticResource TreeViewItemWithIndicatorStyle}"/>
+                    </TreeViewItem>
+                </TreeView>
+                <TreeView Background="Transparent"
+                          BorderThickness="0">
+                    <TreeViewItem Header="REMOTES">
+                        <TreeViewItem Header="origin" >
+                            <TreeViewItem Header="bugfixes_v01" />
+                            <TreeViewItem Header="exporter" />
+                        </TreeViewItem>
+                    </TreeViewItem>
+                </TreeView>
+                <TreeView Background="Transparent"
+                          BorderThickness="0">
+                    <TreeViewItem Header="STASHES">
+                        <TreeViewItem Header="dev-master" />
+                        <TreeViewItem Header="bugfixes_v01" />
+                        <TreeViewItem Header="exporter" />
+                    </TreeViewItem>
+                </TreeView>
+                <TreeView Background="Transparent"
+                          BorderThickness="0">
+                    <TreeViewItem Header="SUBMODULES">
+                        <TreeViewItem Header="_Core" />
+                        <TreeViewItem Header="bugfixes_v01" />
+                        <TreeViewItem Header="exporter" />
+                    </TreeViewItem>
+                </TreeView>
+            </StackPanel>
+
+            <Rectangle HorizontalAlignment="Right"
+                       VerticalAlignment="Stretch"
+                       Width="3"
+                       Opacity=".2">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#00000000" Offset="0" />
+                        <GradientStop Color="#FF000000" Offset="1" />
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Grid>
+</UserControl>

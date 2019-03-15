@@ -90,6 +90,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ImageButton.cs" />
+    <Compile Include="Controls\LabeledControl.xaml.cs">
+      <DependentUpon>LabeledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\LeftMarginMultiplierConverter.cs" />
+    <Compile Include="Helpers\TreeViewItemExtensions.cs" />
     <Compile Include="Interfaces\IRepositoryActivator.cs" />
     <Compile Include="ViewModels\BrokenRepositoryStatusViewModel.cs" />
     <Compile Include="ViewModels\ActiveRepositoryViewModel.cs" />
@@ -97,6 +103,12 @@
     <Compile Include="ViewModels\RepositoryStatusViewModelBase.cs" />
     <Compile Include="Views\BrokenRepositoryStatusView.xaml.cs">
       <DependentUpon>BrokenRepositoryStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CommitHistoryView.xaml.cs">
+      <DependentUpon>CommitHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HistoryView.xaml.cs">
+      <DependentUpon>HistoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RepositoryDetailsView.xaml.cs">
       <DependentUpon>RepositoryDetailsView.xaml</DependentUpon>
@@ -107,6 +119,17 @@
     <Compile Include="Views\RepositoryStatusView.xaml.cs">
       <DependentUpon>RepositoryStatusView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\RepositoryTabView.xaml.cs">
+      <DependentUpon>RepositoryTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RepositoryToolbarView.xaml.cs">
+      <DependentUpon>RepositoryToolbarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RepositoryToolsTreeView.xaml.cs">
+      <DependentUpon>RepositoryToolsTreeView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\LabeledControl.xaml" />
+    <Page Include="Styles\TreeView.xaml" />
     <Page Include="Views\AddRepositoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -115,10 +138,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CommitHistoryView.xaml" />
     <Page Include="Views\DialogShell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\HistoryView.xaml" />
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -152,6 +177,37 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\RepositoryTabView.xaml" />
+    <Page Include="Styles\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\GridSplitter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\TabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RepositoryToolbarView.xaml" />
+    <Page Include="Views\RepositoryToolsTreeView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -179,7 +235,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\SimplyGit.Infrastructure.csproj">
       <Project>{671FDF98-AFE5-4C31-980E-E2BB4C42551F}</Project>

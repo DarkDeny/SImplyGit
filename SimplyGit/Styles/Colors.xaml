@@ -1,0 +1,102 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--Solid colors-->
+    <LinearGradientBrush x:Key="SidePanelColor">#144D6F</LinearGradientBrush>
+    <LinearGradientBrush x:Key="ConsColor">#c30000</LinearGradientBrush>
+    <LinearGradientBrush x:Key="ProsColor">#8FC800</LinearGradientBrush>
+    <LinearGradientBrush x:Key="MainThemeColor">#1C8DB7</LinearGradientBrush>
+    <LinearGradientBrush x:Key="HighlightColor">#32ABD8</LinearGradientBrush>
+    <LinearGradientBrush x:Key="MouseOverColor">#e0f2f9</LinearGradientBrush>
+    <LinearGradientBrush x:Key="SelectedColor">#c5e6f2</LinearGradientBrush>
+    <LinearGradientBrush x:Key="DisabledBorderBrush">#D3D3D3</LinearGradientBrush>
+    <LinearGradientBrush x:Key="WhiteColor">#ffffff</LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ConsAmbientColor">#fdf2f2</LinearGradientBrush>
+    <LinearGradientBrush x:Key="ProsAmbientColor">#f5fbf6</LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="DarkGrayColorMain">#333333</LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="RegularFontColor">#333333</LinearGradientBrush>
+    <LinearGradientBrush x:Key="ConsFontColor">#c30000</LinearGradientBrush>
+    <LinearGradientBrush x:Key="ProsFontColor">#5e8106</LinearGradientBrush>
+    <LinearGradientBrush x:Key="DisabledFontColor">#ADADAD</LinearGradientBrush>
+    <LinearGradientBrush x:Key="StrokeColor">#333333</LinearGradientBrush>
+    <LinearGradientBrush x:Key="GrayDisabledColor">#E5E5E5</LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="GrayColorMain">#7f7f7f</LinearGradientBrush>
+    <LinearGradientBrush x:Key="BackgoundGrayColorMain">#f7f7f7</LinearGradientBrush>
+    <LinearGradientBrush x:Key="HeaderGrayBackgroundColor">#c9c9c9</LinearGradientBrush>
+
+    
+    <!--Gradients-->
+    <LinearGradientBrush x:Key="OrangeHighlightGradient"
+                         EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#FFFEAD02" Offset="0"/>
+        <GradientStop Color="#FFFF8200" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="OrangeMouseOverGradient"
+                         EndPoint="0 1" StartPoint="0 0">
+        <GradientStop Color="#FEC802" Offset="0"/>
+        <GradientStop Color="#FFFF8200" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="OrangeFillGradient"
+                         EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#FFFF8200" Offset="0"/>
+        <GradientStop Color="#FFFF8200" Offset="1"/>
+    </LinearGradientBrush>
+<!---->
+    <LinearGradientBrush x:Key="BlueHighlightGradient"
+                         EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#FF39B8E7" Offset="0"/>
+        <GradientStop Color="#FF1C8DB7" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="BlueMouseOverGradient"
+                         EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#42D3F9" Offset="0"/>
+        <GradientStop Color="#FF1C8DB7" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="BlueFillGradient"
+                         EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#FF1C8DB7" Offset="0"/>
+        <GradientStop Color="#FF1C8DB7" Offset="1"/>
+    </LinearGradientBrush>
+<!---->
+    <LinearGradientBrush x:Key="GrayHighlightGradient"
+                         EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#F4F4F4" Offset="0"/>
+        <GradientStop Color="#FFE5E5E5" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="GrayMouseOverGradient"
+                         EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="White" Offset="0"/>
+        <GradientStop Color="#FFE5E5E5" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="GrayFillGradient"
+                         EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#FFE5E5E5" Offset="0"/>
+        <GradientStop Color="#FFE5E5E5" Offset="1"/>
+    </LinearGradientBrush>
+<!---->
+    <LinearGradientBrush x:Key="LightBlueHighlightGradient"
+                         EndPoint="0 1" StartPoint="0 0">
+        <GradientStop Color="White" Offset="0"/>
+        <GradientStop Color="#c3e4f7" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="LightBlueMouseOverGradient"
+                         EndPoint="0 1" StartPoint="0 0">
+        <GradientStop Color="#c3e4f7" Offset="0"/>
+        <GradientStop Color="#c3e4f7" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="LightBluePressedGradient"
+                         EndPoint="0 1" StartPoint="0 0">
+        <GradientStop Color="#B8DFF6" Offset="0"/>
+        <GradientStop Color="#B8DFF6" Offset="1"/>
+    </LinearGradientBrush>
+    
+    
+    <LinearGradientBrush x:Key="InputBackground"
+                         EndPoint="0 1" StartPoint="0 0">
+        <GradientStop Color="White" Offset="1"/>
+        <GradientStop Color="#c3e4f7" Offset="0"/>
+    </LinearGradientBrush>
+</ResourceDictionary>
