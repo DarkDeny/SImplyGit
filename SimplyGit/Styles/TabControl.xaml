@@ -127,11 +127,26 @@
                             <RowDefinition x:Name="RowDefinition0" Height="Auto"/>
                             <RowDefinition x:Name="RowDefinition1" Height="*"/>
                         </Grid.RowDefinitions>
-                        <TabPanel x:Name="HeaderPanel"
-                                  IsItemsHost="true"
-                                  Margin="0"
-                                  KeyboardNavigation.TabIndex="1"
-                                  Panel.ZIndex="1"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TabPanel x:Name="HeaderPanel"
+                                      IsItemsHost="true"
+                                      Margin="0"
+                                      KeyboardNavigation.TabIndex="1"
+                                      Panel.ZIndex="1"/>
+
+                            <controls:ImageButton 
+                                    Icon="{StaticResource PlusGeom}"
+                                    Style="{StaticResource AddRepoButtonStyle}"
+                                    Command="{Binding AddRepository}"
+                                    Width="30"
+                                    IconHeight="10"
+                                    Panel.ZIndex="2"
+                                    Grid.Column="1"/>
+                        </Grid>
                         <Border x:Name="ContentPanel"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"

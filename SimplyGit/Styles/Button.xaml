@@ -96,6 +96,54 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
+    <ControlTemplate x:Key="AddRepoTemplate" TargetType="{x:Type c:ImageButton}">
+        <Grid>
+            <Border x:Name="MainBorder"
+                    Background="{TemplateBinding Background}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    BorderBrush="{TemplateBinding BorderBrush}" />
+            <Border x:Name="DisableOverlayBorder"
+                    BorderThickness="1"
+                    BorderBrush="{StaticResource DisabledBorderBrush}"
+                    Visibility="Collapsed" />
+            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Center"
+                  Margin="{TemplateBinding Padding}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Path Data="{TemplateBinding Icon}"
+                      Stretch="Uniform"
+                      VerticalAlignment="Center"
+                      Height="{TemplateBinding IconHeight}"
+                      UseLayoutRounding="True"
+                      Fill="{TemplateBinding IconColor}" />
+                <ContentPresenter Grid.Row="1"
+                                  Margin="0 0 0 3"
+                                  Content="{TemplateBinding Text}"
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  RecognizesAccessKey="True"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                  VerticalAlignment="Bottom" />
+
+            </Grid>
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#3E444C" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Foreground" Value="White" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Visibility" Value="Collapsed" TargetName="MainBorder"></Setter>
+                <Setter Property="Visibility" Value="Visible" TargetName="DisableOverlayBorder" />
+                <Setter Property="Foreground" Value="#ADADAD" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
     <Style TargetType="c:ImageButton">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
@@ -166,6 +214,19 @@
         <Setter Property="IconHeight" Value="16"/>
         <Setter Property="IconColor" Value="#0085DF"/>
         <Setter Property="Template" Value="{StaticResource ToolbarButtonTemplate}"/>
+    </Style>
+
+    <Style x:Key="AddRepoButtonStyle" TargetType="c:ImageButton">
+        <Setter Property="Background" Value="#2A2D33"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#BCBCBC"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Width" Value="70"/>
+        <Setter Property="Padding" Value="5 5 5 0"/>
+        <Setter Property="IconHeight" Value="16"/>
+        <Setter Property="IconColor" Value="#0085DF"/>
+        <Setter Property="Template" Value="{StaticResource AddRepoTemplate}"/>
     </Style>
 
     <Style x:Key="CloseButtonStyle" TargetType="c:ImageButton">
