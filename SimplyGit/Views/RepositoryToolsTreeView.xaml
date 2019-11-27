@@ -3,61 +3,93 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:SimplyGit.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{Binding Source={d:DesignInstance Type=vm:RepositoryBookmarkViewModel, IsDesignTimeCreatable=False}}"
              >
-<Grid Background="#22252B">
-            <StackPanel Orientation="Vertical"
-                        Margin="10">
-                <TreeView Background="Transparent"
-                          BorderThickness="0">
-                    <TreeViewItem Header="BRANCHES"
-                                  IsExpanded="True">
-                        <TreeViewItem Header="dev-master"
-                                      Style="{StaticResource TreeViewItemWithIndicatorStyle}"/>
-                        <TreeViewItem Header="bugfixes_v01"
-                                      Style="{StaticResource TreeViewItemWithIndicatorStyle}"/>
-                        <TreeViewItem Header="exporter"
-                                      Style="{StaticResource TreeViewItemWithIndicatorStyle}"/>
-                    </TreeViewItem>
-                </TreeView>
-                <TreeView Background="Transparent"
-                          BorderThickness="0">
-                    <TreeViewItem Header="REMOTES">
-                        <TreeViewItem Header="origin" >
-                            <TreeViewItem Header="bugfixes_v01" />
-                            <TreeViewItem Header="exporter" />
-                        </TreeViewItem>
-                    </TreeViewItem>
-                </TreeView>
-                <TreeView Background="Transparent"
-                          BorderThickness="0">
-                    <TreeViewItem Header="STASHES">
-                        <TreeViewItem Header="dev-master" />
-                        <TreeViewItem Header="bugfixes_v01" />
-                        <TreeViewItem Header="exporter" />
-                    </TreeViewItem>
-                </TreeView>
-                <TreeView Background="Transparent"
-                          BorderThickness="0">
-                    <TreeViewItem Header="SUBMODULES">
-                        <TreeViewItem Header="_Core" />
-                        <TreeViewItem Header="bugfixes_v01" />
-                        <TreeViewItem Header="exporter" />
-                    </TreeViewItem>
-                </TreeView>
-            </StackPanel>
+    <Grid Background="#22252B">
+        <StackPanel
+            Orientation="Vertical"
+            Margin="10"
+            >
+            <TreeView
+                Background="Transparent"
+                BorderThickness="0"
+                >
+                <TreeViewItem
+                    Header="BRANCHES"
+                    IsExpanded="True"
+                    ItemsSource="{Binding LocalBranches}"
+                    DisplayMemberPath="DisplayName"
+                    />
+            </TreeView>
 
-            <Rectangle HorizontalAlignment="Right"
-                       VerticalAlignment="Stretch"
-                       Width="3"
-                       Opacity=".2">
-                <Rectangle.Fill>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop Color="#00000000" Offset="0" />
-                        <GradientStop Color="#FF000000" Offset="1" />
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
-        </Grid>
+            <TreeView
+                Background="Transparent"
+                BorderThickness="0"
+                >
+                <TreeViewItem
+                    Header="Remotes"
+                    ItemsSource="{Binding Remotes}"
+                    >
+                    <TreeViewItem.ItemTemplate>
+                        <HierarchicalDataTemplate
+                            ItemsSource="{Binding RemoteBranches}"
+                            DataType="{x:Type vm:RemoteViewModel}"
+                            >
+                            <TextBlock Text="{Binding DisplayName}" />
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <HierarchicalDataTemplate
+                                    DataType="{x:Type vm:RemoteBranchViewModel}"
+                                    >
+                                    <HierarchicalDataTemplate.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DisplayName}" Foreground="Aqua" />
+                                        </DataTemplate>
+                                    </HierarchicalDataTemplate.ItemTemplate>
+                                </HierarchicalDataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </TreeViewItem.ItemTemplate>
+                </TreeViewItem>
+            </TreeView>
+
+            <TreeView
+                Background="Transparent"
+                BorderThickness="0"
+                >
+                <TreeViewItem
+                    Header="STASHES"
+                    ItemsSource="{Binding Stashes}"
+                    DisplayMemberPath="DisplayName"
+                    />
+            </TreeView>
+
+            <TreeView
+                Background="Transparent"
+                BorderThickness="0"
+                >
+                <TreeViewItem
+                    Header="SUBMODULES"
+                    ItemsSource="{Binding Submodules}"
+                    DisplayMemberPath="DisplayName"
+                    />
+            </TreeView>
+        </StackPanel>
+
+        <Rectangle
+            HorizontalAlignment="Right"
+            VerticalAlignment="Stretch"
+            Width="3"
+            Opacity=".2"
+            >
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#00000000" Offset="0" />
+                    <GradientStop Color="#FF000000" Offset="1" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+    </Grid>
 </UserControl>

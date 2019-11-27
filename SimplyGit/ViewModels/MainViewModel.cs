@@ -97,7 +97,7 @@ namespace SimplyGit.ViewModels {
         }
 
         public static string ProductName => "SimplyGit";
-        public static string ConfigurationFile => "simplygit.cfg";
+        public static string ConfigurationFile => "SimplyGit.cfg";
         public void Activate(RepositoryBookmarkViewModel repo) {
             var vm = new ActiveRepositoryViewModel(repo);
             ActiveRepositories.Add(vm);

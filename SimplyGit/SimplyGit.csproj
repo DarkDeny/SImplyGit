@@ -99,8 +99,12 @@
     <Compile Include="Interfaces\IRepositoryActivator.cs" />
     <Compile Include="ViewModels\BrokenRepositoryStatusViewModel.cs" />
     <Compile Include="ViewModels\ActiveRepositoryViewModel.cs" />
+    <Compile Include="ViewModels\LocalBranchViewModel.cs" />
+    <Compile Include="ViewModels\RemoteViewModel.cs" />
+    <Compile Include="ViewModels\RemoteBranchViewModel.cs" />
     <Compile Include="ViewModels\RepositoryStatusViewModel.cs" />
     <Compile Include="ViewModels\RepositoryStatusViewModelBase.cs" />
+    <Compile Include="ViewModels\StashViewModel.cs" />
     <Compile Include="Views\BrokenRepositoryStatusView.xaml.cs">
       <DependentUpon>BrokenRepositoryStatusView.xaml</DependentUpon>
     </Compile>

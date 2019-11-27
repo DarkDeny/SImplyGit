@@ -29,7 +29,6 @@ namespace SimplyGit.ViewModels {
 
         public int CommitCount => _commits.Count;
         public int BranchesCount => _branches.Count;
-
         public int ChangesCount => _repository.Index.Count;
 
         public string ActiveBranchName => ActiveBranch?.FriendlyName;

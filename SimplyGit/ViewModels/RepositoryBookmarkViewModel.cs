@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using Infrastructure;
 using LibGit2Sharp;
 using Microsoft.Practices.Prism.Commands;
@@ -19,7 +20,6 @@ namespace SimplyGit.ViewModels {
             _activator = activator;
             try {
                 var repository = new Repository(_repositoryModel.WorkingFolder);
-                // TODO: loading a repository can take some noticeble time, we need to show "loading" busy indicator in this case.
                 RepositoryStatus = new RepositoryStatusViewModel(repository);
             }
             catch (Exception ex) {
@@ -27,6 +27,26 @@ namespace SimplyGit.ViewModels {
             }
 
             OpenRepositoryTab = new DelegateCommand(DoOpenRepositoryTab, CanOpenRepositoryTab);
+            LocalBranches = new ObservableCollection<LocalBranchViewModel> {
+                new LocalBranchViewModel("STATIC_DATA_1"),
+                new LocalBranchViewModel("STATIC_DATA_2"),
+                new LocalBranchViewModel("STATIC_DATA_3"),
+            };
+
+            Remotes = new ObservableCollection<RemoteViewModel> {
+                new RemoteViewModel("STATIC_origin"),
+            };
+
+            Stashes = new ObservableCollection<StashViewModel> {
+                new StashViewModel("STATIC_test1"),
+                new StashViewModel("STATIC_cleanup"),
+                new StashViewModel("STATIC_performance"),
+            };
+
+            Submodules = new ObservableCollection<SubmoduleViewModel> {
+                new SubmoduleViewModel("STATIC_core"),
+                new SubmoduleViewModel("STATIC_extern1"),
+            };
         }
 
         private void DoOpenRepositoryTab() {
@@ -38,7 +58,7 @@ namespace SimplyGit.ViewModels {
         }
 
         public string Name {
-            get { return _repositoryModel.Name; }
+            get => _repositoryModel.Name;
             set {
                 if (value != _repositoryModel.Name) {
                     _repositoryModel.Name = value;
@@ -50,5 +70,25 @@ namespace SimplyGit.ViewModels {
         public string WorkingFolder => _repositoryModel.WorkingFolder;
 
         public DelegateCommand OpenRepositoryTab { get; }
+
+        public ObservableCollection<LocalBranchViewModel> LocalBranches { get; }
+
+        public ObservableCollection<RemoteViewModel> Remotes { get; }
+
+        public object CommitHistoryCollection { get; set; }
+
+        public object SelectedCommit { get; set; }
+
+        public ObservableCollection<StashViewModel> Stashes { get; }
+
+        public ObservableCollection<SubmoduleViewModel> Submodules { get; }
+    }
+
+    internal class SubmoduleViewModel {
+        public string DisplayName { get; }
+
+        public SubmoduleViewModel(string displayName) {
+            DisplayName = displayName;
+        }
     }
 }
