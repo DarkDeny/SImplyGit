@@ -1,9 +1,13 @@
+using LibGit2Sharp;
+
 namespace SimplyGit.ViewModels {
     internal class StashViewModel {
-        public string DisplayName { get; }
-
-        public StashViewModel(string displayName) {
-            DisplayName = displayName;
+        public StashViewModel(Stash stash) {
+            _stash = stash;
+            DisplayName = stash.Message;
         }
+
+        private Stash _stash;
+        public string DisplayName { get; }
     }
 }

@@ -105,6 +105,7 @@
     <Compile Include="ViewModels\RepositoryStatusViewModel.cs" />
     <Compile Include="ViewModels\RepositoryStatusViewModelBase.cs" />
     <Compile Include="ViewModels\StashViewModel.cs" />
+    <Compile Include="ViewModels\SubmoduleViewModel.cs" />
     <Compile Include="Views\BrokenRepositoryStatusView.xaml.cs">
       <DependentUpon>BrokenRepositoryStatusView.xaml</DependentUpon>
     </Compile>

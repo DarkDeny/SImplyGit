@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using Infrastructure;
 using LibGit2Sharp;
 using Microsoft.Practices.Prism.Commands;
@@ -10,6 +12,7 @@ namespace SimplyGit.ViewModels {
     internal class RepositoryBookmarkViewModel : ViewModelBase {
         private readonly RepositoryModel _repositoryModel;
         private readonly IRepositoryActivator _activator;
+        private Repository _repository;
 
         public RepositoryStatusViewModelBase RepositoryStatus { get; }
 
@@ -19,34 +22,46 @@ namespace SimplyGit.ViewModels {
             _repositoryModel = repositoryModel;
             _activator = activator;
             try {
-                var repository = new Repository(_repositoryModel.WorkingFolder);
-                RepositoryStatus = new RepositoryStatusViewModel(repository);
+                _repository = new Repository(_repositoryModel.WorkingFolder);
+                RepositoryStatus = new RepositoryStatusViewModel(_repository);
+
+                LocalBranches = new ObservableCollection<LocalBranchViewModel>();
+                Remotes = new ObservableCollection<RemoteViewModel>();
+                Stashes = new ObservableCollection<StashViewModel>();
+                Submodules = new ObservableCollection<SubmoduleViewModel>();
+
+                foreach (var branch in _repository.Branches) {
+                    if (branch.IsRemote) {
+                        var existing = Remotes.FirstOrDefault(r => r.DisplayName == branch.RemoteName);
+                        if (null == existing) {
+                            existing = new RemoteViewModel(branch.RemoteName);
+                            Remotes.Add(existing);
+                        }
+
+                        existing.AddBranch(branch);
+                    }
+                    else {
+                        var vm = new LocalBranchViewModel(branch);
+                        LocalBranches.Add(vm);
+                    }
+                }
+
+                foreach (var stash in _repository.Stashes) {
+                    var vm = new StashViewModel(stash);
+                    Stashes.Add(vm);
+                }
+
+                foreach (var submodule in _repository.Submodules) {
+                    var vm = new SubmoduleViewModel(submodule);
+                    Submodules.Add(vm);
+                }
             }
             catch (Exception ex) {
                 RepositoryStatus = new BrokenRepositoryStatusViewModel(ex.Message);
             }
 
             OpenRepositoryTab = new DelegateCommand(DoOpenRepositoryTab, CanOpenRepositoryTab);
-            LocalBranches = new ObservableCollection<LocalBranchViewModel> {
-                new LocalBranchViewModel("STATIC_DATA_1"),
-                new LocalBranchViewModel("STATIC_DATA_2"),
-                new LocalBranchViewModel("STATIC_DATA_3"),
-            };
 
-            Remotes = new ObservableCollection<RemoteViewModel> {
-                new RemoteViewModel("STATIC_origin"),
-            };
-
-            Stashes = new ObservableCollection<StashViewModel> {
-                new StashViewModel("STATIC_test1"),
-                new StashViewModel("STATIC_cleanup"),
-                new StashViewModel("STATIC_performance"),
-            };
-
-            Submodules = new ObservableCollection<SubmoduleViewModel> {
-                new SubmoduleViewModel("STATIC_core"),
-                new SubmoduleViewModel("STATIC_extern1"),
-            };
         }
 
         private void DoOpenRepositoryTab() {
@@ -82,13 +97,5 @@ namespace SimplyGit.ViewModels {
         public ObservableCollection<StashViewModel> Stashes { get; }
 
         public ObservableCollection<SubmoduleViewModel> Submodules { get; }
-    }
-
-    internal class SubmoduleViewModel {
-        public string DisplayName { get; }
-
-        public SubmoduleViewModel(string displayName) {
-            DisplayName = displayName;
-        }
     }
 }
