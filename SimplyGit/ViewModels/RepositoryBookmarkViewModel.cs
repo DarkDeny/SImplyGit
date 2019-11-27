@@ -1,26 +1,21 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using Infrastructure;
 using LibGit2Sharp;
-using Microsoft.Practices.Prism.Commands;
-using SimplyGit.Interfaces;
 using SimplyGit.Models;
 
 namespace SimplyGit.ViewModels {
     internal class RepositoryBookmarkViewModel : ViewModelBase {
         private readonly RepositoryModel _repositoryModel;
-        private readonly IRepositoryActivator _activator;
         private Repository _repository;
 
         public RepositoryStatusViewModelBase RepositoryStatus { get; }
 
         public RepositoryModel Model => _repositoryModel;
 
-        public RepositoryBookmarkViewModel(RepositoryModel repositoryModel, IRepositoryActivator activator) {
+        public RepositoryBookmarkViewModel(RepositoryModel repositoryModel) {
             _repositoryModel = repositoryModel;
-            _activator = activator;
             try {
                 _repository = new Repository(_repositoryModel.WorkingFolder);
                 RepositoryStatus = new RepositoryStatusViewModel(_repository);
@@ -29,6 +24,7 @@ namespace SimplyGit.ViewModels {
                 Remotes = new ObservableCollection<RemoteViewModel>();
                 Stashes = new ObservableCollection<StashViewModel>();
                 Submodules = new ObservableCollection<SubmoduleViewModel>();
+                CommitHistoryCollection = new ObservableCollection<CommitViewModel>();
 
                 foreach (var branch in _repository.Branches) {
                     if (branch.IsRemote) {
@@ -55,21 +51,19 @@ namespace SimplyGit.ViewModels {
                     var vm = new SubmoduleViewModel(submodule);
                     Submodules.Add(vm);
                 }
+
+                foreach (var commit in _repository.Commits) {
+                    var vm = new CommitViewModel(commit);
+                    CommitHistoryCollection.Add(vm);
+
+                    if (CommitHistoryCollection.Count > 15) {
+                        break;
+                    }
+                }
             }
             catch (Exception ex) {
                 RepositoryStatus = new BrokenRepositoryStatusViewModel(ex.Message);
             }
-
-            OpenRepositoryTab = new DelegateCommand(DoOpenRepositoryTab, CanOpenRepositoryTab);
-
-        }
-
-        private void DoOpenRepositoryTab() {
-            _activator.Activate(this);
-        }
-
-        private bool CanOpenRepositoryTab() {
-            return RepositoryStatus.CanOpenRepositoryTab;
         }
 
         public string Name {
@@ -84,13 +78,11 @@ namespace SimplyGit.ViewModels {
 
         public string WorkingFolder => _repositoryModel.WorkingFolder;
 
-        public DelegateCommand OpenRepositoryTab { get; }
-
         public ObservableCollection<LocalBranchViewModel> LocalBranches { get; }
 
         public ObservableCollection<RemoteViewModel> Remotes { get; }
 
-        public object CommitHistoryCollection { get; set; }
+        public ObservableCollection<CommitViewModel> CommitHistoryCollection { get; }
 
         public object SelectedCommit { get; set; }
 

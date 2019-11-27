@@ -7,7 +7,7 @@ namespace SimplyGit.ViewModels {
         public CommitViewModel(Commit commit) {
             _commit = commit;
 
-            Description = _commit.Message;
+            Description = _commit.MessageShort;
             Author = commit.Author.Name;
             CommitId = commit.Sha;
             Date = commit.Author.When.DateTime;

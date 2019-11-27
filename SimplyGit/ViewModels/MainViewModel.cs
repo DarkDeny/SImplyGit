@@ -37,7 +37,7 @@ namespace SimplyGit.ViewModels {
             BookmarkedRepositories = new ObservableCollection<RepositoryBookmarkViewModel>();
             if (_configuration.Repositories?.Count > 0) {
                 foreach (var repository in _configuration.Repositories) {
-                    var vm = new RepositoryBookmarkViewModel(repository, this);
+                    var vm = new RepositoryBookmarkViewModel(repository);
                     BookmarkedRepositories.Add(vm);
                 }
             }
@@ -74,7 +74,7 @@ namespace SimplyGit.ViewModels {
             var result = dialog.ShowDialog();
             if (result == true) {
                 var newRepo = new RepositoryModel(arvm.RepositoryName, arvm.WorkingFolder);
-                var vm = new RepositoryBookmarkViewModel(newRepo, this);
+                var vm = new RepositoryBookmarkViewModel(newRepo);
                 BookmarkedRepositories.Add(vm);
             }
         }

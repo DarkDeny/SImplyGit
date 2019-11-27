@@ -99,6 +99,7 @@
     <Compile Include="Interfaces\IRepositoryActivator.cs" />
     <Compile Include="ViewModels\BrokenRepositoryStatusViewModel.cs" />
     <Compile Include="ViewModels\ActiveRepositoryViewModel.cs" />
+    <Compile Include="ViewModels\CommitViewModel.cs" />
     <Compile Include="ViewModels\LocalBranchViewModel.cs" />
     <Compile Include="ViewModels\RemoteViewModel.cs" />
     <Compile Include="ViewModels\RemoteBranchViewModel.cs" />
