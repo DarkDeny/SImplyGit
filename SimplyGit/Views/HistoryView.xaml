@@ -10,7 +10,7 @@
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{Binding Source={d:DesignInstance Type=vm:ActiveRepositoryViewModel, IsDesignTimeCreatable=False}}"
              >
-    <Grid>
+    <Grid DataContext="{Binding}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
 
         <!--Commit history grid-->
-        <local:CommitHistoryView DataContext="{Binding}"/>
+        <local:CommitHistoryView/>
 
         <!--Split-->
         <GridSplitter
@@ -34,7 +34,7 @@
         <!--Details and changes-->
         <Grid
             Grid.Row="2"
-            DataContext="{Binding SelectedCommit}"
+            
             >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -43,7 +43,8 @@
             </Grid.ColumnDefinitions>
 
             <!--Files-->
-            <Grid Margin="15 10">
+            <Grid Margin="15 10"
+                  DataContext="{Binding SelectedCommit}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="26"/>
@@ -101,7 +102,7 @@
                             LabelAlignment="Right"
                             FontWeight="Bold"
                             >
-                            <TextBlock FontWeight="Regular" Text="{Binding CommitId}"/>
+                            <TextBlock FontWeight="Regular" Text="{Binding CommitId, FallbackValue=''}"/>
                         </c:LabeledControl>
 
                         <c:LabeledControl
@@ -110,7 +111,7 @@
                             LabelAlignment="Right"
                             FontWeight="Bold"
                             >
-                            <TextBlock FontWeight="Regular" Text="{Binding Author}"/>
+                            <TextBlock FontWeight="Regular" Text="{Binding Author, FallbackValue=''}"/>
                         </c:LabeledControl>
 
                         <c:LabeledControl
@@ -119,7 +120,7 @@
                             LabelAlignment="Right"
                             FontWeight="Bold"
                             >
-                            <TextBlock FontWeight="Regular" Text="{Binding Date}"/>
+                            <TextBlock FontWeight="Regular" Text="{Binding Date, FallbackValue=''}"/>
                         </c:LabeledControl>
 
                         <c:LabeledControl
@@ -127,7 +128,8 @@
                             Margin="0 10 0 0"
                             FontWeight="Bold"
                             >
-                            <TextBlock FontWeight="SemiBold" Text="{Binding Description}"/>
+                            <TextBlock FontWeight="SemiBold" Text="{Binding Description, FallbackValue=''}"
+                                       TextWrapping="Wrap"/>
                         </c:LabeledControl>
                     </Grid>
                 </Border>

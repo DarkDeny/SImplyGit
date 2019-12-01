@@ -60,6 +60,10 @@ namespace SimplyGit.ViewModels {
                         break;
                     }
                 }
+
+                if (CommitHistoryCollection.Any()) {
+                    SelectedCommit = CommitHistoryCollection.FirstOrDefault();
+                }
             }
             catch (Exception ex) {
                 RepositoryStatus = new BrokenRepositoryStatusViewModel(ex.Message);
@@ -84,7 +88,17 @@ namespace SimplyGit.ViewModels {
 
         public ObservableCollection<CommitViewModel> CommitHistoryCollection { get; }
 
-        public object SelectedCommit { get; set; }
+        private object _selectedCommit;
+
+        public object SelectedCommit {
+            get { return _selectedCommit; }
+            set {
+                if (Equals(value, _selectedCommit))
+                    return;
+                _selectedCommit = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableCollection<StashViewModel> Stashes { get; }
 
