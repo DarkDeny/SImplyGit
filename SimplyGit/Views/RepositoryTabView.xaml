@@ -12,8 +12,10 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="220"
+                              MinWidth="220"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -24,7 +26,7 @@
         <views:RepositoryToolbarView
             Grid.Row="0"
             Grid.Column="0"
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="3"
             DataContext="{Binding }"
             />
         <views:RepositoryToolsTreeView
@@ -34,8 +36,15 @@
             />
         <views:HistoryView
             Grid.Row="1"
-            Grid.Column="1"
+            Grid.Column="2"
             DataContext="{Binding }"
             />
+
+        <GridSplitter Grid.Column="1" Grid.Row="1"
+                      Margin="-3,0"
+                      BorderThickness="3,0"
+                      BorderBrush="Transparent"
+                      ShowsPreview="False" Width="3"
+                      HorizontalAlignment="Center" VerticalAlignment="Stretch" />
     </Grid>
 </UserControl>

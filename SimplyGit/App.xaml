@@ -14,6 +14,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/Icons.xaml" />
                 <ResourceDictionary Source="Styles/Colors.xaml" />
+                <ResourceDictionary Source="Styles/ScrollViewer.xaml" />
                 <ResourceDictionary Source="Styles/GridSplitter.xaml" />
                 <ResourceDictionary Source="Styles/TreeView.xaml" />
                 <ResourceDictionary Source="Styles/Button.xaml" />

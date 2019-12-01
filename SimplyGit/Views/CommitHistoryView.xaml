@@ -15,21 +15,26 @@
             ItemsSource="{Binding CommitHistoryCollection}"
             SelectedItem="{Binding SelectedCommit, Mode=TwoWay}"
             Background="Transparent"
-            BorderThickness="0">
+            BorderThickness="0"
+            >
             <ListView.View>
                 <GridView>
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Description}"
-                        Header="Description" />
+                        Header="Description"
+                        Width="Auto"/>
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Date}"
-                        Header="Date" />
+                        Header="Date" 
+                        Width="Auto"/>
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Author}"
-                        Header="Author" />
+                        Header="Author" 
+                        Width="Auto"/>
                     <GridViewColumn
                         DisplayMemberBinding="{Binding CommitId}"
-                        Header="CommitId" />
+                        Header="CommitId" 
+                        />
                 </GridView>
             </ListView.View>
         </ListView>

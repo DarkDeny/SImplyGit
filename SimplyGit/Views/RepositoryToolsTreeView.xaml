@@ -6,84 +6,77 @@
              xmlns:vm="clr-namespace:SimplyGit.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{Binding Source={d:DesignInstance Type=vm:RepositoryBookmarkViewModel, IsDesignTimeCreatable=False}}"
-             >
+             d:DataContext="{Binding Source={d:DesignInstance Type=vm:RepositoryBookmarkViewModel, IsDesignTimeCreatable=False}}">
     <Grid Background="#22252B">
-        <StackPanel
-            Orientation="Vertical"
-            Margin="10"
-            >
-            <TreeView
-                Background="Transparent"
-                BorderThickness="0"
-                >
-                <TreeViewItem
-                    Header="BRANCHES"
-                    IsExpanded="True"
-                    ItemsSource="{Binding LocalBranches}"
-                    DisplayMemberPath="DisplayName"
-                    />
-            </TreeView>
+        <ScrollViewer>
+            <Grid VerticalAlignment="Top"
+                  Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TreeView
+                    Background="Transparent"
+                    BorderThickness="0">
+                    <TreeViewItem
+                        Header="BRANCHES"
+                        IsExpanded="True"
+                        ItemsSource="{Binding LocalBranches}"
+                        DisplayMemberPath="DisplayName" />
+                </TreeView>
 
-            <TreeView
-                Background="Transparent"
-                BorderThickness="0"
-                >
-                <TreeViewItem
-                    Header="Remotes"
-                    ItemsSource="{Binding Remotes}"
-                    >
-                    <TreeViewItem.ItemTemplate>
-                        <HierarchicalDataTemplate
-                            ItemsSource="{Binding RemoteBranches}"
-                            DataType="{x:Type vm:RemoteViewModel}"
-                            >
-                            <TextBlock Text="{Binding DisplayName}" />
-                            <HierarchicalDataTemplate.ItemTemplate>
-                                <HierarchicalDataTemplate
-                                    DataType="{x:Type vm:RemoteBranchViewModel}"
-                                    >
-                                    <HierarchicalDataTemplate.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding DisplayName}" Foreground="Aqua" />
-                                        </DataTemplate>
-                                    </HierarchicalDataTemplate.ItemTemplate>
-                                </HierarchicalDataTemplate>
-                            </HierarchicalDataTemplate.ItemTemplate>
-                        </HierarchicalDataTemplate>
-                    </TreeViewItem.ItemTemplate>
-                </TreeViewItem>
-            </TreeView>
+                <TreeView Grid.Row="1"
+                          Background="Transparent"
+                          BorderThickness="0">
+                    <TreeViewItem
+                        Header="Remotes"
+                        ItemsSource="{Binding Remotes}">
+                        <TreeViewItem.ItemTemplate>
+                            <HierarchicalDataTemplate
+                                ItemsSource="{Binding RemoteBranches}"
+                                DataType="{x:Type vm:RemoteViewModel}">
+                                <TextBlock Text="{Binding DisplayName}" />
+                                <HierarchicalDataTemplate.ItemTemplate>
+                                    <HierarchicalDataTemplate
+                                        DataType="{x:Type vm:RemoteBranchViewModel}">
+                                        <HierarchicalDataTemplate.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding DisplayName}" Foreground="Aqua" />
+                                            </DataTemplate>
+                                        </HierarchicalDataTemplate.ItemTemplate>
+                                    </HierarchicalDataTemplate>
+                                </HierarchicalDataTemplate.ItemTemplate>
+                            </HierarchicalDataTemplate>
+                        </TreeViewItem.ItemTemplate>
+                    </TreeViewItem>
+                </TreeView>
 
-            <TreeView
-                Background="Transparent"
-                BorderThickness="0"
-                >
-                <TreeViewItem
-                    Header="STASHES"
-                    ItemsSource="{Binding Stashes}"
-                    DisplayMemberPath="DisplayName"
-                    />
-            </TreeView>
+                <TreeView Grid.Row="2"
+                          Background="Transparent"
+                          BorderThickness="0">
+                    <TreeViewItem
+                        Header="STASHES"
+                        ItemsSource="{Binding Stashes}"
+                        DisplayMemberPath="DisplayName" />
+                </TreeView>
 
-            <TreeView
-                Background="Transparent"
-                BorderThickness="0"
-                >
-                <TreeViewItem
-                    Header="SUBMODULES"
-                    ItemsSource="{Binding Submodules}"
-                    DisplayMemberPath="DisplayName"
-                    />
-            </TreeView>
-        </StackPanel>
-
+                <TreeView Grid.Row="3"
+                          Background="Transparent"
+                          BorderThickness="0">
+                    <TreeViewItem
+                        Header="SUBMODULES"
+                        ItemsSource="{Binding Submodules}"
+                        DisplayMemberPath="DisplayName" />
+                </TreeView>
+            </Grid>
+        </ScrollViewer>
         <Rectangle
             HorizontalAlignment="Right"
             VerticalAlignment="Stretch"
             Width="3"
-            Opacity=".2"
-            >
+            Opacity=".2">
             <Rectangle.Fill>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                     <GradientStop Color="#00000000" Offset="0" />
