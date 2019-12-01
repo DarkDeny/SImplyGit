@@ -34,20 +34,8 @@
                         Header="Remotes"
                         ItemsSource="{Binding Remotes}">
                         <TreeViewItem.ItemTemplate>
-                            <HierarchicalDataTemplate
-                                ItemsSource="{Binding RemoteBranches}"
-                                DataType="{x:Type vm:RemoteViewModel}">
+                            <HierarchicalDataTemplate ItemsSource="{Binding Path=RemoteBranches}">
                                 <TextBlock Text="{Binding DisplayName}" />
-                                <HierarchicalDataTemplate.ItemTemplate>
-                                    <HierarchicalDataTemplate
-                                        DataType="{x:Type vm:RemoteBranchViewModel}">
-                                        <HierarchicalDataTemplate.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding DisplayName}" Foreground="Aqua" />
-                                            </DataTemplate>
-                                        </HierarchicalDataTemplate.ItemTemplate>
-                                    </HierarchicalDataTemplate>
-                                </HierarchicalDataTemplate.ItemTemplate>
                             </HierarchicalDataTemplate>
                         </TreeViewItem.ItemTemplate>
                     </TreeViewItem>

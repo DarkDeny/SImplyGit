@@ -5,7 +5,8 @@ namespace SimplyGit.ViewModels {
     internal class RemoteBranchViewModel : ViewModelBase {
         public RemoteBranchViewModel(Branch branch) {
             _branch = branch;
-            DisplayName = branch.CanonicalName;
+            var allWords = branch.CanonicalName.Split('/');
+            DisplayName = allWords[allWords.Length - 1];
         }
 
         private readonly Branch _branch;
