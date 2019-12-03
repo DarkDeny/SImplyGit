@@ -104,6 +104,7 @@
     <Compile Include="ViewModels\BrokenRepositoryStatusViewModel.cs" />
     <Compile Include="ViewModels\ActiveRepositoryViewModel.cs" />
     <Compile Include="ViewModels\CommitViewModel.cs" />
+    <Compile Include="ViewModels\DiffViewModel.cs" />
     <Compile Include="ViewModels\LocalBranchViewModel.cs" />
     <Compile Include="ViewModels\RemoteViewModel.cs" />
     <Compile Include="ViewModels\RemoteBranchViewModel.cs" />
@@ -114,8 +115,11 @@
     <Compile Include="Views\BrokenRepositoryStatusView.xaml.cs">
       <DependentUpon>BrokenRepositoryStatusView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CommitHistoryView.xaml.cs">
-      <DependentUpon>CommitHistoryView.xaml</DependentUpon>
+    <Compile Include="Views\CommitDetailsView.xaml.cs">
+      <DependentUpon>CommitDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CommitsGridView.xaml.cs">
+      <DependentUpon>CommitsGridView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HistoryView.xaml.cs">
       <DependentUpon>HistoryView.xaml</DependentUpon>
@@ -152,7 +156,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CommitHistoryView.xaml" />
+    <Page Include="Views\CommitDetailsView.xaml" />
+    <Page Include="Views\CommitsGridView.xaml" />
     <Page Include="Views\DialogShell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

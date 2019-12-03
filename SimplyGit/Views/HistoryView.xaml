@@ -4,12 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SimplyGit.Views"
-             xmlns:c="clr-namespace:SimplyGit.Controls"
              xmlns:vm="clr-namespace:SimplyGit.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{Binding Source={d:DesignInstance Type=vm:ActiveRepositoryViewModel, IsDesignTimeCreatable=False}}"
+             d:DataContext="{Binding Source={d:DesignInstance Type=vm:RepositoryBookmarkViewModel, IsDesignTimeCreatable=False}}"
              >
+
     <Grid DataContext="{Binding}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -17,10 +17,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--Commit history grid-->
-        <local:CommitHistoryView/>
+        <local:CommitsGridView
+            Grid.Row="0"
+            />
 
-        <!--Split-->
         <GridSplitter
             Grid.Row="1"
             Margin="0 0 0 -6"
@@ -31,189 +31,9 @@
             HorizontalAlignment="Stretch"
             />
 
-        <!--Details and changes-->
-        <Grid
+        <local:CommitDetailsView
             Grid.Row="2"
-            
-            >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="1" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            <!--Files-->
-            <Grid Margin="15 10"
-                  DataContext="{Binding SelectedCommit}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="26"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
-                <DockPanel LastChildFill="True">
-                    <TextBlock
-                        Text="FILES"
-                        FontWeight="SemiBold"
-                        FontSize="14"
-                        Foreground="#607588"
-                        DockPanel.Dock="Left"
-                        />
-                    <ComboBox
-                        DockPanel.Dock="Right"
-                        Width="80"
-                        SelectedIndex="0"
-                        >
-                        <ComboBoxItem Content="List"/>
-                        <ComboBoxItem Content="Tree"/>
-                    </ComboBox>
-                    <ComboBox
-                        HorizontalAlignment="Right"
-                        Width="120"
-                        SelectedIndex="0"
-                        >
-                        <ComboBoxItem Content="Sort A-Z"/>
-                        <ComboBoxItem Content="Sort Z-A"/>
-                        <ComboBoxItem Content="Sort by date"/>
-                    </ComboBox>
-                </DockPanel>
-                <Border
-                    Grid.Row="2"
-                    TextElement.FontSize="12"
-                    TextElement.Foreground="#607588"
-                    BorderThickness="4 0 0 0"
-                    BorderBrush="#607588"
-                    Padding="10 0"
-                    VerticalAlignment="Top"
-                    >
-                    <Grid Grid.IsSharedSizeScope="True">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <c:LabeledControl
-                            Grid.Row="0"
-                            Label="Commit:"
-                            LabelAlignment="Right"
-                            FontWeight="Bold"
-                            >
-                            <TextBlock FontWeight="Regular" Text="{Binding CommitId, FallbackValue=''}"/>
-                        </c:LabeledControl>
-
-                        <c:LabeledControl
-                            Grid.Row="1"
-                            Label="Author:"
-                            LabelAlignment="Right"
-                            FontWeight="Bold"
-                            >
-                            <TextBlock FontWeight="Regular" Text="{Binding Author, FallbackValue=''}"/>
-                        </c:LabeledControl>
-
-                        <c:LabeledControl
-                            Grid.Row="2"
-                            Label="Created at:"
-                            LabelAlignment="Right"
-                            FontWeight="Bold"
-                            >
-                            <TextBlock FontWeight="Regular" Text="{Binding Date, FallbackValue=''}"/>
-                        </c:LabeledControl>
-
-                        <c:LabeledControl
-                            Grid.Row="3"
-                            Margin="0 10 0 0"
-                            FontWeight="Bold"
-                            >
-                            <TextBlock FontWeight="SemiBold" Text="{Binding Description, FallbackValue=''}"
-                                       TextWrapping="Wrap"/>
-                        </c:LabeledControl>
-                    </Grid>
-                </Border>
-
-                <Rectangle
-                    Grid.Row="3"
-                    SnapsToDevicePixels="True"
-                    Height="1"
-                    HorizontalAlignment="Stretch"
-                    Fill="#405059"
-                    Margin="-15 15"
-                    />
-                <ListView
-                    Grid.Row="4"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    ItemsSource="{Binding Files}"
-                    >
-                    <ListView.Resources>
-                        <Style TargetType="{x:Type GridViewColumnHeader}">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                        </Style>
-                    </ListView.Resources>
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding FullPath}"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </Grid>
-
-            <GridSplitter
-                Grid.Column="1"
-                Margin="-3,0"
-                BorderThickness="3,0"
-                BorderBrush="Transparent"
-                HorizontalAlignment="Stretch"
-                />
-
-            <Grid
-                Grid.Column="2"
-                Margin="15 10"
-                >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="15"/>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-
-                <DockPanel
-                    LastChildFill="False"
-                    VerticalAlignment="Top"
-                    >
-                    <TextBlock
-                        Text="CHANGES"
-                        FontWeight="SemiBold"
-                        FontSize="14"
-                        Foreground="#607588"
-                        DockPanel.Dock="Left"
-                        />
-                    <c:ImageButton
-                        DockPanel.Dock="Right"
-                        Text="Reverse hunk"
-                        Icon="{StaticResource RevertGeom}"
-                        Style="{StaticResource TextButtonStyle}"
-                        />
-                </DockPanel>
-
-                <Rectangle
-                    Grid.Row="2"
-                    VerticalAlignment="Stretch"
-                    HorizontalAlignment="Stretch"
-                    Fill="#31363D"
-                    />
-
-                <Rectangle
-                    Grid.Row="3"
-                    Margin="0 15 0 0"
-                    VerticalAlignment="Stretch"
-                    HorizontalAlignment="Stretch"
-                    Fill="#31363D"
-                    />
-            </Grid>
-        </Grid>
+            DataContext="{Binding SelectedCommit}"
+            />
     </Grid>
 </UserControl>

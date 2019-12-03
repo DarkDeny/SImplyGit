@@ -53,9 +53,8 @@ namespace SimplyGit.ViewModels {
                 }
 
                 foreach (var commit in _repository.Commits) {
-                    var vm = new CommitViewModel(commit);
+                    var vm = new CommitViewModel(commit, _repository);
                     CommitHistoryCollection.Add(vm);
-
                     if (CommitHistoryCollection.Count > 15) {
                         break;
                     }
@@ -88,14 +87,16 @@ namespace SimplyGit.ViewModels {
 
         public ObservableCollection<CommitViewModel> CommitHistoryCollection { get; }
 
-        private object _selectedCommit;
-
-        public object SelectedCommit {
+        private CommitViewModel _selectedCommit;
+        public CommitViewModel SelectedCommit {
             get { return _selectedCommit; }
             set {
                 if (Equals(value, _selectedCommit))
                     return;
+
+                _selectedCommit?.OnDeactivate();
                 _selectedCommit = value;
+                _selectedCommit?.OnActivate();
                 OnPropertyChanged();
             }
         }
