@@ -8,7 +8,8 @@ using SimplyGit.Models;
 namespace SimplyGit.ViewModels {
     internal class RepositoryBookmarkViewModel : ViewModelBase {
         private readonly RepositoryModel _repositoryModel;
-        private Repository _repository;
+        // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
+        private readonly Repository _repository;
 
         public RepositoryStatusViewModelBase RepositoryStatus { get; }
 
@@ -89,7 +90,7 @@ namespace SimplyGit.ViewModels {
 
         private CommitViewModel _selectedCommit;
         public CommitViewModel SelectedCommit {
-            get { return _selectedCommit; }
+            get => _selectedCommit;
             set {
                 if (Equals(value, _selectedCommit))
                     return;
