@@ -9,7 +9,6 @@
             <DataTemplate DataType="{x:Type viewModels:AddRepositoryViewModel}">
                 <views:AddRepositoryView/>
             </DataTemplate>
-            <!-- <Style TargetType="{x:Type Rectangle}" /> -->
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/Icons.xaml" />
