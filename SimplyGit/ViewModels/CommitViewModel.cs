@@ -15,7 +15,13 @@ namespace SimplyGit.ViewModels {
             CommitId = commit.Sha;
             Date = commit.Author.When.DateTime;
 
+            Tags = new ObservableCollection<string>();
             ChangedFiles = new ObservableCollection<DiffViewModel>();
+            if (null != _commit.Notes) {
+                foreach (var commitNote in _commit.Notes) {
+                    Debug.WriteLine(commitNote);
+                }
+            }
         }
 
         public void OnDeactivate() {
@@ -65,9 +71,15 @@ namespace SimplyGit.ViewModels {
         private readonly Commit _commit;
         private readonly Repository _repository;
 
-        public string Description { get; set; }
+        public string Description { get; }
         public DateTime Date { get; set; }
         public string Author { get; set; }
         public string CommitId { get; set; }
+
+        public void AddTag(Tag tag) {
+            Tags.Add(tag.FriendlyName);
+        }
+
+        public ObservableCollection<string> Tags { get; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Infrastructure;
@@ -56,8 +57,19 @@ namespace SimplyGit.ViewModels {
                 foreach (var commit in _repository.Commits) {
                     var vm = new CommitViewModel(commit, _repository);
                     CommitHistoryCollection.Add(vm);
+                    _commits[commit] = vm;
                     if (CommitHistoryCollection.Count > 15) {
                         break;
+                    }
+                }
+
+                foreach (var tag in _repository.Tags) {
+                    var target = tag.Target;
+                    var targetCommit = target as Commit;
+                    if (null != targetCommit) {
+                        if (_commits.ContainsKey(targetCommit)) {
+                            _commits[targetCommit].AddTag(tag);
+                        }
                     }
                 }
 
@@ -89,6 +101,8 @@ namespace SimplyGit.ViewModels {
         public ObservableCollection<CommitViewModel> CommitHistoryCollection { get; }
 
         private CommitViewModel _selectedCommit;
+        private readonly Dictionary<Commit, CommitViewModel> _commits = new Dictionary<Commit, CommitViewModel>();
+
         public CommitViewModel SelectedCommit {
             get => _selectedCommit;
             set {

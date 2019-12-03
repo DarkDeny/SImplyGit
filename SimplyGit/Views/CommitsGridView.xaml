@@ -20,10 +20,32 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn
-                        DisplayMemberBinding="{Binding Description}"
                         Header="Description"
                         Width="Auto"
-                        />
+                        >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <ItemsControl
+                                        ItemsSource="{Binding Tags}"
+                                        Width="Auto"
+                                        >
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBox
+                                                    Text="{Binding Mode=OneWay}"
+                                                    IsReadOnly="true"
+                                                    IsEnabled="False"
+                                                    Margin="0 0 5 0"
+                                                    />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <TextBlock Text="{Binding Description, Mode=OneWay}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Date}"
                         Header="Date"
