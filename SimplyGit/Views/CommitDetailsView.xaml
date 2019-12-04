@@ -129,7 +129,9 @@
                 </ListView.Resources>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding FileName}"/>
+                        <!--Width * is not available for listview, and to stretch the content, we need to handle it in the way like this-->
+                        <GridViewColumn DisplayMemberBinding="{Binding FileName}"
+                                        Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
