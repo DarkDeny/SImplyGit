@@ -6,9 +6,10 @@
         xmlns:vm="clr-namespace:SimplyGit.ViewModels"
         xmlns:views="clr-namespace:SimplyGit.Views"
         mc:Ignorable="d"
-        Title="SimplyGit"
+        Title=""
         Height="768"
         Width="1366"
+        Style="{StaticResource WindowStyle}"
         d:DataContext="{Binding Source={d:DesignInstance Type=vm:MainViewModel, IsDesignTimeCreatable=False}}"
         >
 

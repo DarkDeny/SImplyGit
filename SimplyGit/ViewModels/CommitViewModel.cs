@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using Infrastructure;
 using LibGit2Sharp;
 
@@ -46,6 +47,10 @@ namespace SimplyGit.ViewModels {
                 foreach (var difference in repoDifferences) {
                     var vm = new DiffViewModel(difference);
                     ChangedFiles.Add(vm);
+                }
+
+                if (ChangedFiles.Any()) {
+                    SelectedFile = ChangedFiles.FirstOrDefault();
                 }
             }
             catch (Exception ex) {
