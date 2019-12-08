@@ -22,14 +22,14 @@
     <DockPanel>
         <TabControl
                 Background="#2A2D33"
-                BorderThickness="0"
                 Padding="0"
+                Style="{StaticResource AddRepoTabControlStyle}"
                 ItemsSource="{Binding BookmarkedRepositories}"
                 SelectedIndex="0"
                 >
                 <TabControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
                     </DataTemplate>
                 </TabControl.ItemTemplate>
 

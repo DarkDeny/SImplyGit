@@ -99,6 +99,7 @@
       <DependentUpon>LabeledControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\WindowStyle.cs" />
+    <Compile Include="Helpers\BoolToVisibilityConverter.cs" />
     <Compile Include="Helpers\EnumFileStatusToIconConverter.cs" />
     <Compile Include="Helpers\LeftMarginMultiplierConverter.cs" />
     <Compile Include="Helpers\TreeViewItemExtensions.cs" />

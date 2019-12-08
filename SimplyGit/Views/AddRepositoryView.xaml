@@ -8,68 +8,119 @@
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{Binding Source={d:DesignInstance Type=vm:AddRepositoryViewModel, IsDesignTimeCreatable=False}}"
              >
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <TabControl>
+        <TabItem Header="Add local repo"
+                 Background="Transparent">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
         
-        <TextBlock 
-            Text="Repository name:"
-            Margin="10"
-            Grid.Column="0"
-            Grid.Row="0"
-            />
-        <TextBox
-            Text="{Binding RepositoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            Margin="10"
-            Grid.Column="1"
-            Grid.Row="0"
-            />
-
-        <TextBlock
-            Text="Working folder:"
-            Margin="10"
-            Grid.Column="0"
-            Grid.Row="1"
-            />
-        <Grid Grid.Column="1" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <TextBox 
-                Grid.Column="0"
-                IsReadOnly="True"
-                Text="{Binding WorkingFolder}"     
-                Margin="10"
+                <TextBlock 
+                    Text="Repository name:"
+                    Margin="10"
+                    HorizontalAlignment="Right"
+                    Grid.Column="0"
+                    Grid.Row="0"
                 />
-            <Button 
-                Grid.Column="1"
-                Content="Select folder" 
-                Command="{Binding SelectWorkingFolder}"
-                Margin="10"
+                <TextBox
+                    Text="{Binding RepositoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Margin="10"
+                    Grid.Column="1"
+                    Grid.Row="0"
                 />
-        </Grid>
 
-        <TextBlock
-            Text="Selected folder status:"
-            Margin="10"
-            Grid.Column="0"
-            Grid.Row="2"
-            />
-        <TextBlock
-            Text="{Binding WorkingFolderStatus}"
-            Margin="10"
-            Grid.Column="1"
-            Grid.Row="2"
-            />
+                <TextBlock
+                    HorizontalAlignment="Right"
+                    Text="Working folder:"
+                    Margin="10"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                />
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox 
+                        Grid.Column="0"
+                        IsReadOnly="True"
+                        Text="{Binding WorkingFolder}"     
+                        Margin="10"
+                    />
+                    <Button 
+                        Grid.Column="1"
+                        Content="Select folder" 
+                        Command="{Binding SelectWorkingFolder}"
+                        Margin="10"
+                    />
+                </Grid>
+
+                <TextBlock
+                    Text="Selected folder status:"
+                    Margin="10"
+                    Grid.Column="0"
+                    Grid.Row="2"
+                />
+                <TextBlock
+                    Text="{Binding WorkingFolderStatus}"
+                    Margin="10"
+                    Grid.Column="1"
+                    Grid.Row="2"
+                />
         
-    </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Clone a repo">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Connect to:"
+                           Margin="10" 
+                           HorizontalAlignment="Right"/>
+                <ComboBox Grid.Column="1"
+                          Grid.Row="0"
+                          Margin="10" 
+                          >
+                    <ComboBoxItem Content="Github"
+                                  IsSelected="True"/>
+                    <ComboBoxItem Content="BitBucket"/>
+                </ComboBox>
+
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                           Text="Url link:"
+                           Margin="10" 
+                           HorizontalAlignment="Right"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="10" />
+
+                <TextBlock Grid.Row="2" Grid.Column="0"
+                           Margin="10"
+                           Text="Where to clone:"
+                           HorizontalAlignment="Right"/>
+                <DockPanel Grid.Row="2" Grid.Column="1"
+                           LastChildFill="True"
+                           Margin="10">
+                    <Button Content="Browse" DockPanel.Dock="Right"
+                            Margin="10 0 0 0"/>
+                    <TextBox IsReadOnly="True"/>
+                </DockPanel>
+            </Grid>
+        </TabItem>
+    </TabControl>
+
 </UserControl>
