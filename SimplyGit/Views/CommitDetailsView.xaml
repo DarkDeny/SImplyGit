@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:c="clr-namespace:SimplyGit.Controls"
+             xmlns:avalon="http://icsharpcode.net/sharpdevelop/avalonedit"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              >
@@ -175,18 +176,20 @@
                     />
             </DockPanel>
 
-            <TextBox
+            <avalon:TextEditor
+                DataContext="{Binding SelectedFile}"
                 Grid.Row="2"
                 Foreground="Bisque"
                 Background="#31363D"
-                Text="{Binding SelectedFile.Diff, Mode=OneWay}"
+                Document="{Binding Document, Mode=OneWay}"
                 FontFamily="Consolas"
-                AcceptsReturn="True"
                 IsReadOnly="True"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 VerticalScrollBarVisibility="Visible"
-                />
+                Loaded="OnTextEditorLoaded"
+                >
+            </avalon:TextEditor>
         </Grid>
     </Grid>
 </UserControl>
