@@ -5,6 +5,11 @@ namespace SimplyGit.Views {
     /// Interaction logic for DialogShell.xaml
     /// </summary>
     public partial class DialogShell {
+        public DialogShell(string title) {
+            Title = title;
+            InitializeComponent();
+        }
+
         public DialogShell() {
             InitializeComponent();
         }

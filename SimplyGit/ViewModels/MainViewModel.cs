@@ -68,7 +68,7 @@ namespace SimplyGit.ViewModels {
 
         private void DoAddRepo() {
             var arvm = new AddRepositoryViewModel();
-            var dialog= new DialogShell();
+            var dialog= new DialogShell("Add new repo");
             dialog.Owner = _app.MainWindow;
             dialog.DataContext = arvm;
             var result = dialog.ShowDialog();

@@ -5,9 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:c="clr-namespace:SimplyGit.Controls"
              xmlns:avalon="http://icsharpcode.net/sharpdevelop/avalonedit"
+             xmlns:helpers="clr-namespace:SimplyGit.Helpers"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              >
+    <UserControl.Resources>
+        <helpers:EnumFileStatusToIconConverter x:Key="EnumToIconConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -130,6 +134,17 @@
                 </ListView.Resources>
                 <ListView.View>
                     <GridView>
+                        <GridViewColumn Header="StatusIcon"
+                                        Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ChangeKind, Converter={StaticResource EnumToIconConverter}}"
+                                           ToolTip="{Binding ChangeKind, Mode=OneWay}"
+                                           Stretch="None"
+                                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                         <!--Width * is not available for listview, and to stretch the content, we need to handle it in the way like this-->
                         <GridViewColumn DisplayMemberBinding="{Binding FileName}"
                                         Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}}"/>

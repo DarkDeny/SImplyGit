@@ -104,6 +104,7 @@
                                                 Margin="4,0,0,0"
                                                 FontFamily="Segoe UI"
                                                 FontSize="12"
+                                                FontWeight="Bold"
                                                 Foreground="White"
                                                 Text="{Binding Path=Title, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
                                             <Button
