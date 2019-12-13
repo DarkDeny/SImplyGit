@@ -1,60 +1,74 @@
 using System.Collections.Generic;
 using System.Linq;
-using ICSharpCode.AvalonEdit.Document;
 using LibGit2Sharp;
 using SimplyGit.Views;
 
 namespace SimplyGit.ViewModels {
     internal class DiffViewModel {
         private readonly PatchEntryChanges _difference;
-        private readonly List<DiffStatus> _lineStyles = new List<DiffStatus>();
 
         public DiffViewModel(PatchEntryChanges difference) {
             _difference = difference;
+            Hunks = new List<Hunk>();
 
-            // TODO: be able to show changes as hunks!
             var lines = _difference.Patch.Split('\n').ToList();
-            lines = lines.Skip(5).ToList();
-            LineCount = lines.Count;
+            lines = lines.Skip(4).ToList();
 
-            for (int i = 0; i < lines.Count; i++) {
-                if (lines[i].StartsWith("+")) {
-                    _lineStyles.Add(DiffStatus.Added);
-                    lines[i] = lines[i].Substring(1);
+            Hunk currentHunk = null;
+            int curLeftLine = 0;
+            int curRightLine = 0;
+            foreach (var line in lines) {
+                if (line.StartsWith("@@")) {
+                    // TODO: extract line numbers data!
+                    var substring = line.Substring(2);
+                    var index = substring.IndexOf("@@");
+                    substring = substring.Substring(0, index);
+                    var startIndex1 = substring.IndexOf("-");
+                    var endIndex1 = substring.IndexOf(",");
+                    var leftStartingLine = substring.Substring(startIndex1 + 1, endIndex1 - startIndex1 - 1);
+
+                    var startIndex2 = substring.IndexOf("+");
+                    var tail = substring.Substring(startIndex2);
+
+                    var endIndex2 = tail.IndexOf(",");
+                    var rightStartingLine = tail.Substring( 1, endIndex2 - 1);
+
+                    int.TryParse(leftStartingLine, out curLeftLine);
+                    int.TryParse(rightStartingLine, out curRightLine);
+
+                    currentHunk = new Hunk();
+                    Hunks.Add(currentHunk);
                     continue;
                 }
 
-                if (lines[i].StartsWith("-")) {
-                    _lineStyles.Add(DiffStatus.Removed);
-                    lines[i] = lines[i].Substring(1);
+                if (null == currentHunk) {
                     continue;
                 }
 
-                if (lines[i].StartsWith("!")) {
-                    _lineStyles.Add(DiffStatus.Modified);
-                    lines[i] = lines[i].Substring(1);
-                    continue;
+                var diffLine = new DiffLine();
+                currentHunk.DiffLines.Add(diffLine);
+                diffLine.LineText = line;
+                if (line.StartsWith("+")) {
+                    diffLine.LineStatus = DiffStatus.Added;
+                    diffLine.LineNumberRight = curRightLine;
+                    curRightLine++;
+                } else if (line.StartsWith("-")) {
+                    diffLine.LineStatus = DiffStatus.Removed;
+                    diffLine.LineNumberLeft = curLeftLine;
+                    curLeftLine++;
                 }
-
-                _lineStyles.Add(DiffStatus.Context);
+                else {
+                    diffLine.LineStatus = DiffStatus.Context;
+                    diffLine.LineNumberRight = curRightLine;
+                    curRightLine++;
+                    diffLine.LineNumberLeft = curLeftLine;
+                    curLeftLine++;
+                }
             }
-
-            Diff = string.Join("\n", lines);
-
-            Document = new TextDocument();
-            Document.Text = string.Join("\n", lines);
         }
 
-        public TextDocument Document { get; }
-
+        public List<Hunk> Hunks { get; }
         public ChangeKind ChangeKind => _difference.Status;
         public string FileName => _difference.Path;
-        public string Diff { get; }
-
-        public int LineCount { get; }
-
-        public DiffStatus GetLineStyle(int lineNumber) {
-            return _lineStyles[lineNumber];
-        }
     }
 }

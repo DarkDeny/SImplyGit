@@ -4,14 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:c="clr-namespace:SimplyGit.Controls"
-             xmlns:avalon="http://icsharpcode.net/sharpdevelop/avalonedit"
              xmlns:helpers="clr-namespace:SimplyGit.Helpers"
+             xmlns:views="clr-namespace:SimplyGit.Views"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              >
+
     <UserControl.Resources>
         <helpers:EnumFileStatusToIconConverter x:Key="EnumToIconConverter"/>
+        <views:LineStatusColorConverter x:Key="LineStatusColorConverter"/>
     </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -141,7 +144,8 @@
                                     <Image Source="{Binding ChangeKind, Converter={StaticResource EnumToIconConverter}}"
                                            ToolTip="{Binding ChangeKind, Mode=OneWay}"
                                            Stretch="None"
-                                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                                           RenderOptions.BitmapScalingMode="HighQuality"
+                                           />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -169,7 +173,6 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="15"/>
                 <RowDefinition />
-                <RowDefinition />
             </Grid.RowDefinitions>
 
             <DockPanel
@@ -183,28 +186,83 @@
                     Foreground="#607588"
                     DockPanel.Dock="Left"
                     />
-                <c:ImageButton
-                    DockPanel.Dock="Right"
-                    Text="Reverse hunk"
-                    Icon="{StaticResource RevertGeom}"
-                    Style="{StaticResource TextButtonStyle}"
-                    />
+
             </DockPanel>
 
-            <avalon:TextEditor
-                DataContext="{Binding SelectedFile}"
+            <ItemsControl
+                ItemsSource="{Binding SelectedFile.Hunks}"
                 Grid.Row="2"
-                Foreground="Bisque"
-                Background="#31363D"
-                Document="{Binding Document, Mode=OneWay}"
-                FontFamily="Consolas"
-                IsReadOnly="True"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                VerticalScrollBarVisibility="Visible"
-                Loaded="OnTextEditorLoaded"
                 >
-            </avalon:TextEditor>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <DockPanel
+                                Grid.Row="0"
+                                LastChildFill="False"
+                                VerticalAlignment="Top"
+                                >
+                                <c:ImageButton
+                                    DockPanel.Dock="Right"
+                                    Text="Reverse hunk"
+                                    Command="{Binding ReverseHunk}"
+                                    Icon="{StaticResource RevertGeom}"
+                                    Style="{StaticResource TextButtonStyle}"
+                                    />
+                            </DockPanel>
+
+                             <ItemsControl
+                                Grid.Row="1"
+                                ItemsSource="{Binding DiffLines}"
+                                Margin="0 20 0 0"
+                                >
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid IsSharedSizeScope="True">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" SharedSizeGroup="LineNumberColumn" />
+                                                <ColumnDefinition Width="Auto" SharedSizeGroup="LineNumberColumn" />
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock
+                                                Grid.Column="0"
+                                                Text="{Binding LineNumberLeft}"
+                                                FontFamily="Consolas"
+                                                FontSize="12"
+                                                HorizontalAlignment="Right"
+                                                Margin="5 0 0 0"
+                                                />
+
+                                            <TextBlock
+                                                Grid.Column="1"
+                                                Text="{Binding LineNumberRight}"
+                                                FontFamily="Consolas"
+                                                FontSize="12"
+                                                HorizontalAlignment="Right"
+                                                Margin="5 0 0 0"
+                                                />
+
+                                            <TextBlock
+                                                Grid.Column="2"
+                                                Text="{Binding LineText}"
+                                                Margin="5 0 0 0"
+                                                FontFamily="Consolas"
+                                                FontSize="12"
+                                                Background="{Binding LineStatus, Converter={StaticResource LineStatusColorConverter}}"
+                                                />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Grid>
     </Grid>
 </UserControl>
