@@ -286,15 +286,33 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\FileStatus\added.png" />
-    <Resource Include="Icons\FileStatus\conflicted.png" />
-    <Resource Include="Icons\FileStatus\copied.png" />
-    <Resource Include="Icons\FileStatus\deleted.png" />
-    <Resource Include="Icons\FileStatus\modified.png" />
-    <Resource Include="Icons\FileStatus\renamed.png" />
-    <Resource Include="Icons\FileStatus\unreadable.png" />
-    <Resource Include="Icons\FileStatus\untracked.png" />
-    <Resource Include="Icons\FileStatus\ignored.png" />
+    <Resource Include="Icons\FileStatus\added.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\FileStatus\conflicted.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\FileStatus\copied.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\FileStatus\deleted.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\FileStatus\modified.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\FileStatus\renamed.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\FileStatus\unreadable.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\FileStatus\untracked.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\FileStatus\ignored.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
