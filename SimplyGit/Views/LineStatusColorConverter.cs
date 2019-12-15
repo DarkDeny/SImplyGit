@@ -6,13 +6,13 @@ using System.Windows.Media;
 namespace SimplyGit.Views {
     public class LineStatusColorConverter : IValueConverter {
         static LineStatusColorConverter() {
-            AddedBrush = new SolidColorBrush(Color.FromRgb(146, 236, 146));
+            AddedBrush = new SolidColorBrush(Color.FromRgb(48,119,118));
             AddedBrush.Freeze();
 
-            RemovedBrush = new SolidColorBrush(Color.FromRgb(238, 167, 167));
+            RemovedBrush = new SolidColorBrush(Color.FromRgb(152,84,62));
             RemovedBrush.Freeze();
 
-            BlankBackground = new SolidColorBrush(Color.FromRgb(109, 109, 109));
+            BlankBackground = new SolidColorBrush(Color.FromArgb(0,0,0,0));
         }
 
         public static SolidColorBrush AddedBrush { get; }

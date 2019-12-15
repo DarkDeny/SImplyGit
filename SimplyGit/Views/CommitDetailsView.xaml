@@ -189,80 +189,84 @@
 
             </DockPanel>
 
-            <ItemsControl
-                ItemsSource="{Binding SelectedFile.Hunks}"
-                Grid.Row="2"
-                >
+            <ScrollViewer Grid.Row="2">
+                <ItemsControl Grid.IsSharedSizeScope="True"
+                              ItemsSource="{Binding SelectedFile.Hunks}"
+                              >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
+                        <Border Background="#22252B"
+                                Margin="0 5 5 5"
+                                Padding="0 5 5 5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
 
-                            <DockPanel
-                                Grid.Row="0"
-                                LastChildFill="False"
-                                VerticalAlignment="Top"
-                                >
                                 <c:ImageButton
-                                    DockPanel.Dock="Right"
+                                    Grid.Row="0"
+                                    Margin="0 0 0 5"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
                                     Text="Reverse hunk"
                                     Command="{Binding ReverseHunk}"
                                     Icon="{StaticResource RevertGeom}"
-                                    Style="{StaticResource TextButtonStyle}"
-                                    />
-                            </DockPanel>
+                                    Style="{StaticResource TextButtonStyle}" />
 
-                             <ItemsControl
-                                Grid.Row="1"
-                                ItemsSource="{Binding DiffLines}"
-                                Margin="0 20 0 0"
-                                >
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid IsSharedSizeScope="True">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" SharedSizeGroup="LineNumberColumn" />
-                                                <ColumnDefinition Width="Auto" SharedSizeGroup="LineNumberColumn" />
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
+                                 <ItemsControl
+                                    Grid.Row="1"
+                                    ItemsSource="{Binding DiffLines}"
+                                    >
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="LineNumberColumn" />
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="LineNumberColumn" />
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
 
-                                            <TextBlock
-                                                Grid.Column="0"
-                                                Text="{Binding LineNumberLeft}"
-                                                FontFamily="Consolas"
-                                                FontSize="12"
-                                                HorizontalAlignment="Right"
-                                                Margin="5 0 0 0"
-                                                />
+                                                <TextBlock
+                                                    Grid.Column="0"
+                                                    Text="{Binding LineNumberLeft}"
+                                                    FontFamily="Consolas"
+                                                    FontSize="12"
+                                                    HorizontalAlignment="Right"
+                                                    Margin="5 0 0 0"
+                                                    Foreground="#FF607588"
+                                                    />
 
-                                            <TextBlock
-                                                Grid.Column="1"
-                                                Text="{Binding LineNumberRight}"
-                                                FontFamily="Consolas"
-                                                FontSize="12"
-                                                HorizontalAlignment="Right"
-                                                Margin="5 0 0 0"
-                                                />
+                                                <TextBlock
+                                                    Grid.Column="1"
+                                                    Text="{Binding LineNumberRight}"
+                                                    FontFamily="Consolas"
+                                                    FontSize="12"
+                                                    HorizontalAlignment="Right"
+                                                    Margin="5 0 0 0"
+                                                    Foreground="#FF607588"
+                                                    />
 
-                                            <TextBlock
-                                                Grid.Column="2"
-                                                Text="{Binding LineText}"
-                                                Margin="5 0 0 0"
-                                                FontFamily="Consolas"
-                                                FontSize="12"
-                                                Background="{Binding LineStatus, Converter={StaticResource LineStatusColorConverter}}"
-                                                />
-                                        </Grid>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </Grid>
+                                                <TextBlock
+                                                    Grid.Column="2"
+                                                    Text="{Binding LineText}"
+                                                    Margin="10 0 0 0"
+                                                    Padding="10 0 0 0"
+                                                    FontFamily="Consolas"
+                                                    FontSize="12"
+                                                    Foreground="White"
+                                                    Background="{Binding LineStatus, Converter={StaticResource LineStatusColorConverter}}"
+                                                    />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Grid>
+                        </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </UserControl>
