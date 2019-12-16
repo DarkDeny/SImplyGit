@@ -37,7 +37,7 @@ namespace SimplyGit.Controls {
 
             int index = 0;
             foreach (var row in SortedChildren) {
-                RowDefinitions.Add(new RowDefinition());
+                RowDefinitions.Add(new RowDefinition{Height = GridLength.Auto});
                 SetRow(row, index++);
                 Children.Add(row);
             }

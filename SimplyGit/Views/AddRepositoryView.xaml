@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:SimplyGit.ViewModels"
+             xmlns:controls="clr-namespace:SimplyGit.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{Binding Source={d:DesignInstance Type=vm:AddRepositoryViewModel, IsDesignTimeCreatable=False}}"
@@ -11,115 +12,42 @@
     <TabControl>
         <TabItem Header="Add local repo"
                  Background="Transparent">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-        
-                <TextBlock 
-                    Text="Repository name:"
-                    Margin="10"
-                    HorizontalAlignment="Right"
-                    Grid.Column="0"
-                    Grid.Row="0"
-                />
-                <TextBox
-                    Text="{Binding RepositoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    Margin="10"
-                    Grid.Column="1"
-                    Grid.Row="0"
-                />
-
-                <TextBlock
-                    HorizontalAlignment="Right"
-                    Text="Working folder:"
-                    Margin="10"
-                    Grid.Column="0"
-                    Grid.Row="1"
-                />
-                <Grid Grid.Column="1" Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox 
-                        Grid.Column="0"
-                        IsReadOnly="True"
-                        Text="{Binding WorkingFolder}"     
-                        Margin="10"
-                    />
-                    <Button 
-                        Grid.Column="1"
-                        Content="Select folder" 
-                        Command="{Binding SelectWorkingFolder}"
-                        Margin="10"
-                    />
-                </Grid>
-
-                <TextBlock
-                    Text="Selected folder status:"
-                    Margin="10"
-                    Grid.Column="0"
-                    Grid.Row="2"
-                />
-                <TextBlock
-                    Text="{Binding WorkingFolderStatus}"
-                    Margin="10"
-                    Grid.Column="1"
-                    Grid.Row="2"
-                />
-        
-            </Grid>
+            <controls:LabelPanel Margin="10">
+                <controls:LabeledControl Label="Repository name:">
+                    <TextBox Text="{Binding RepositoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </controls:LabeledControl>
+                <controls:LabeledControl Label="Working folder:">
+                    <TextBox Text="{Binding WorkingFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <controls:LabeledControl.Details>
+                        <Button 
+                            Grid.Column="1"
+                            Content="Select folder" 
+                            Command="{Binding SelectWorkingFolder}"
+                        />
+                    </controls:LabeledControl.Details>
+                </controls:LabeledControl>
+            </controls:LabelPanel>
         </TabItem>
+
         <TabItem Header="Clone a repo">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Connect to:"
-                           Margin="10" 
-                           HorizontalAlignment="Right"/>
-                <ComboBox Grid.Column="1"
-                          Grid.Row="0"
-                          Margin="10" 
-                          >
-                    <ComboBoxItem Content="Github"
-                                  IsSelected="True"/>
-                    <ComboBoxItem Content="BitBucket"/>
-                </ComboBox>
-
-                <TextBlock Grid.Row="1" Grid.Column="0"
-                           Text="Url link:"
-                           Margin="10" 
-                           HorizontalAlignment="Right"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="10" />
-
-                <TextBlock Grid.Row="2" Grid.Column="0"
-                           Margin="10"
-                           Text="Where to clone:"
-                           HorizontalAlignment="Right"/>
-                <DockPanel Grid.Row="2" Grid.Column="1"
-                           LastChildFill="True"
-                           Margin="10">
-                    <Button Content="Browse" DockPanel.Dock="Right"
-                            Margin="10 0 0 0"/>
+            <controls:LabelPanel Margin="10">
+                <controls:LabeledControl Label="Connect to:">
+                    <ComboBox>
+                        <ComboBoxItem Content="Github"
+                                      IsSelected="True" />
+                        <ComboBoxItem Content="BitBucket" />
+                    </ComboBox>
+                </controls:LabeledControl>
+                <controls:LabeledControl Label="Url link:">
+                    <TextBox/>
+                </controls:LabeledControl>
+                <controls:LabeledControl Label="Where to clone:">
                     <TextBox IsReadOnly="True"/>
-                </DockPanel>
-            </Grid>
+                    <controls:LabeledControl.Details>
+                        <Button Content="Browse"/>
+                    </controls:LabeledControl.Details>
+                </controls:LabeledControl>
+            </controls:LabelPanel>
         </TabItem>
     </TabControl>
 

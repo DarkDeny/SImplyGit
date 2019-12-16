@@ -22,7 +22,7 @@ namespace SimplyGit.Controls {
 
         public static readonly DependencyProperty LabelAlignmentProperty = DependencyProperty.Register(
             "LabelAlignment", typeof(HorizontalAlignment), typeof(LabeledControl),
-            new PropertyMetadata(default(HorizontalAlignment)));
+            new PropertyMetadata(HorizontalAlignment.Right));
 
         public HorizontalAlignment LabelAlignment {
             get { return (HorizontalAlignment) GetValue(LabelAlignmentProperty); }
