@@ -98,6 +98,7 @@
     <Compile Include="Controls\LabeledControl.xaml.cs">
       <DependentUpon>LabeledControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LabelPanel.cs" />
     <Compile Include="Controls\WindowStyle.cs" />
     <Compile Include="Helpers\BoolToVisibilityConverter.cs" />
     <Compile Include="Helpers\EnumFileStatusToIconConverter.cs" />
@@ -126,11 +127,11 @@
     <Compile Include="Views\CommitsGridView.xaml.cs">
       <DependentUpon>CommitsGridView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DiffStatus.cs" />
+    <Compile Include="Helpers\DiffStatus.cs" />
     <Compile Include="Views\HistoryView.xaml.cs">
       <DependentUpon>HistoryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LineStatusColorConverter.cs" />
+    <Compile Include="Helpers\LineStatusColorConverter.cs" />
     <Compile Include="Views\RepositoryDetailsView.xaml.cs">
       <DependentUpon>RepositoryDetailsView.xaml</DependentUpon>
     </Compile>

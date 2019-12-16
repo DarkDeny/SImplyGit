@@ -1,3 +1,4 @@
+using SimplyGit.Helpers;
 using SimplyGit.Views;
 
 namespace SimplyGit.ViewModels {

@@ -29,6 +29,14 @@ namespace SimplyGit.Controls {
             set { SetValue(LabelAlignmentProperty, value); }
         }
 
+        public static readonly DependencyProperty DetailsProperty = DependencyProperty.Register(
+            "Details", typeof(object), typeof(LabeledControl), new PropertyMetadata(default(object)));
+
+        public object Details {
+            get { return (object) GetValue(DetailsProperty); }
+            set { SetValue(DetailsProperty, value); }
+        }
+
         public LabeledControl() {
             InitializeComponent();
         }

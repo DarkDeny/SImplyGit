@@ -12,7 +12,7 @@
 
     <UserControl.Resources>
         <helpers:EnumFileStatusToIconConverter x:Key="EnumToIconConverter"/>
-        <views:LineStatusColorConverter x:Key="LineStatusColorConverter"/>
+        <helpers:LineStatusColorConverter x:Key="LineStatusColorConverter"/>
     </UserControl.Resources>
 
     <Grid>
@@ -189,6 +189,7 @@
 
             </DockPanel>
 
+            <!--Diffs-->
             <ScrollViewer Grid.Row="2">
                 <ItemsControl Grid.IsSharedSizeScope="True"
                               ItemsSource="{Binding SelectedFile.Hunks}"

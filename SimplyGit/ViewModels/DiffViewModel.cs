@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using LibGit2Sharp;
+using SimplyGit.Helpers;
 using SimplyGit.Views;
 
 namespace SimplyGit.ViewModels {

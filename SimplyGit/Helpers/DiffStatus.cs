@@ -1,4 +1,4 @@
-namespace SimplyGit.Views {
+namespace SimplyGit.Helpers {
     public enum DiffStatus {
         Added,
         Removed,

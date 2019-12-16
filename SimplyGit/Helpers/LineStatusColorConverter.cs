@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace SimplyGit.Views {
+namespace SimplyGit.Helpers {
     public class LineStatusColorConverter : IValueConverter {
         static LineStatusColorConverter() {
             AddedBrush = new SolidColorBrush(Color.FromRgb(48,119,118));
