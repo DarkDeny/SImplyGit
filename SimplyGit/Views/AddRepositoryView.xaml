@@ -16,7 +16,7 @@
                 <controls:LabeledControl Label="Repository name:">
                     <TextBox Text="{Binding RepositoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </controls:LabeledControl>
-                <controls:LabeledControl Label="Working folder:">
+                <controls:LabeledControl Label="Working folder:"> 
                     <TextBox Text="{Binding WorkingFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <controls:LabeledControl.Details>
                         <Button 
@@ -25,6 +25,10 @@
                             Command="{Binding SelectWorkingFolder}"
                         />
                     </controls:LabeledControl.Details>
+                </controls:LabeledControl>
+                <controls:LabeledControl Label="Selected folder status:">
+                    <TextBlock Margin="15 0 0 0"
+                        Text="{Binding WorkingFolderStatus}"/>
                 </controls:LabeledControl>
             </controls:LabelPanel>
         </TabItem>
